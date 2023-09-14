@@ -3,73 +3,59 @@
  * My theme Function
  */
 
-// Theme title 
-add_theme_support('title-tag');
-
+//  All Default functions here
+include_once('inc/default.php');
 
 // Theme CSS and jQuery File Calling 
-function a2n_css_js_file_calling()
+include_once('inc/enqueue.php');
+
+// Theme function
+include_once('inc/theme_function.php');
+
+// Menu Register function
+include_once('inc/menu_register.php');
+
+// Widgets Register
+include_once('inc/widgets_register.php');
+
+
+// Create a Custom Post Type
+function custom_projects()
 {
-    wp_enqueue_style('a2n-style', get_stylesheet_uri());
-    wp_register_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '5.3.0', 'all');
-    wp_register_style('custom', get_template_directory_uri() . '/css/custom.css', array(), '1.0.0', 'all');
-    wp_register_style('responsive', get_template_directory_uri() . '/css/responsive.css', array(), '1.0.0', 'all');
-    wp_enqueue_style('bootstrap');
-    wp_enqueue_style('custom');
-    wp_enqueue_style('responsive');
-
-
-    // jQuery 
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '5.3.0', 'true');
-    wp_enqueue_script('app', get_template_directory_uri() . '/js/app.js', array(), '1.0.0', 'true');
-}
-add_action('wp_enqueue_scripts', 'a2n_css_js_file_calling');
-
-
-//  Google Fonts Enqueue
-
-function a2n_add_google_fonts()
-{
-    wp_enqueue_style('a2n_google_fonts', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Urbanist:wght@300;400;500;600;700;800&display=swap', false);
-
-}
-add_action('wp_enqueue_scripts', 'a2n_add_google_fonts');
-
-
-
-// Theme Function
-function a2n_customizer_register($wp_customize)
-{
-    $wp_customize->add_section(
-        'a2n_header_area',
+    register_post_type(
+        'project',
         array(
-            'title' => __('Header', 'nabil'),
-            'description' => 'You can update your header area.'
+            'labels' => array(
+                'name' => ('Projects'),
+                'singular_name' => ('project'),
+                'add_new' => ('Add New Project'),
+                'add_new_item' => ('Add New Project'),
+                'edit_item' => ('Edit project'),
+                'new_item' => ('New project'),
+                'view_item' => ('View project'),
+                'not_found' => ('Sorry, we cound\'n find the project you are looking for.'),
+            ),
+            'menu_icon' => 'dashicons-networking',
+            'public' => true,
+            'publicly_queryable' => true,
+            'exclude_from_search' => true,
+            'menu_position' => 5,
+            'has_archive' => true,
+            'hierarchial' => true,
+            'show_ui' => true,
+            'capability_type' => 'post',
+            'rewrite' => array('slag' => 'project'),
+            'supports' => array('title', 'thumbnail', 'editor'),
         )
     );
-    $wp_customize->add_setting(
-        'a2n_logo',
-        array(
-            'default' => get_bloginfo('template_directory') . '/img/logo.png',
-        )
-    );
-    $wp_customize->add_control(
-        new WP_Customize_Image_Control(
-            $wp_customize,
-            'a2n_logo',
-            array(
-                'label' => 'Logo Upload',
-                'description' => 'You can upload your logo here.',
-                'setting' => 'a2n_logo',
-                'section' => 'a2n_header_area'
-
-            )
-        )
-    );
+    add_theme_support('post-thumbnails');
 }
-add_action('customize_register', 'a2n_customizer_register');
+
+add_action('init', 'custom_projects');
 
 
-// Menu Register
-register_nav_menu('primary_menu', __('Main Menu', 'nabil'));
+
+// Thumbnil Image Area
+add_theme_support('post-thumbnails', array('page', 'post', 'project', ));
+add_image_size('project', 380, 300, true);
+add_image_size('post-thumbnails', 970, 350, true);
