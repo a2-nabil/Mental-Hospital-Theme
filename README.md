@@ -1,5 +1,12 @@
 # mentalhospital
 Demo Of this WordPress theme
+The Task Codes are here
+SetUp: you can install this theme or
+you can Check **'functions.php' & 'custom-projects-template.php'** file
+
+
+
+
 
 
 Task Steps:
