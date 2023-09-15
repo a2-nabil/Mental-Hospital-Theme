@@ -2,17 +2,28 @@
 /*
 Template Name: Custom Projects Template
 */
-get_header(); ?>
+get_header();
 
-<section id='body_area projects_area' class="heading-m">
-    <div class="container">
-        <div class="row gy-4">
-            <?php
-            query_posts('post_type=project&post_status=publish&posts_per_page=-1&order=ASC&paged=' . get_query_var('post'));
-            if (have_posts()):
-                $i = 1;
-                while (have_posts()):
-                    the_post();
+$args = array(
+    'posts_per_page' => -1,
+    'post_type' => 'project',
+    'post_status' => 'publish',
+    'order' => 'ASC',
+    'paged' => '',
+);
+
+$the_query = new WP_Query($args);
+
+if ($the_query->have_posts()):
+    $i = 1; // Set the increment variable  
+    ?>
+
+    <section id='body_area projects_area' class="heading-m">
+        <div class="container">
+            <div class="row gy-4">
+
+                <?php while ($the_query->have_posts()):
+                    $the_query->the_post();
                     ?>
                     <div class="col-md-4">
                         <div class="card" style="overflow: hidden;">
@@ -29,6 +40,7 @@ get_header(); ?>
                             </div>
                         </div>
                     </div>
+
                     <div class="modal fade" id="Modal-<?php echo $i; ?>" tabindex="-1"
                         aria-labelledby="ModalLabel-<?php echo $i; ?>" aria-hidden="true">
                         <div class="modal-dialog">
@@ -48,11 +60,21 @@ get_header(); ?>
                             </div>
                         </div>
                     </div>
-                    <?php $i++;
+
+                    <?php
+                    $i++; // Increment the increment variable by 1    
                 endwhile;
-            endif;
-            ?>
+                wp_reset_postdata(); ?>
+
+            </div>
         </div>
-    </div>
-</section>
-<?php get_footer(); ?>
+    </section>
+
+
+
+    <?php
+else:
+    echo ('Sorry, no project published today, please try tomorrow');
+endif;
+get_footer();
+?>
