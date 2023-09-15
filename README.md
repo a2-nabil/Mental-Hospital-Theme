@@ -1,7 +1,7 @@
 # mentalhospital
-Demo Of this WordPress theme
+
 The Task Codes are here
-SetUp: you can install this theme or
+#SetUp: you can install this theme or
 you can Check **'functions.php' & 'custom-projects-template.php'** file
 
 
@@ -9,7 +9,7 @@ you can Check **'functions.php' & 'custom-projects-template.php'** file
 
 
 
-Task Steps:
+**Task Steps:**
 1. Custom Post Type Setup:
 In the theme's functions.php file,
 I've created a custom post type called "project" using the "register_post_type" function.
