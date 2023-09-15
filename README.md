@@ -4,17 +4,17 @@ Demo Of this WordPress theme
 
 Task Steps:
 1. Custom Post Type Setup:
-2. In the theme's functions.php file,
+In the theme's functions.php file,
 I've created a custom post type called "project" using the "register_post_type" function.
 Configured the post type to have labels for the admin dashboard, be publicly visible, and have an archive.
 Enabled support for the 'title,' 'editor,' and 'thumbnail' fields for projects.
 
 
-3. Custom Projects Template:
+2. Custom Projects Template:
 I've created a custom template named 'Custom Projects Template' using the Template Name comment at the beginning of my PHP file. This template is used to display your custom projects.
 
 
-4. Querying and Displaying Custom Posts:
+3. Querying and Displaying Custom Posts:
 
 In my template, I'm querying custom posts of the 'project' type using 'WP_Query'. I retrieve all published projects and loop through them to display their title, thumbnail, and excerpt.
 
@@ -29,7 +29,7 @@ Include a "View Project" button with a unique 'data-bs-target' attribute pointin
 After each project iteration, i increment the '$i' variable to ensure that each modal has a unique ID.
 
 
-5. Modal:
+4. Modal:
 Introduction: 
 I create a modal for each project using Bootstrap modal, it is used to display the modal content each project when a user clicks on a "View Project" button.
 I create a Bootstrap modal for each project with a unique ID (#Modal-1, #Modal-2, etc.).
